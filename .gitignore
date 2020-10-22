@@ -13,6 +13,7 @@
 
 # Exclude files that should come from an archive repo (instead of a code repo)
 .ipk
+_bin
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
