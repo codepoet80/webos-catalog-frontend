@@ -91,10 +91,10 @@ background: -webkit-gradient(linear, left top, left bottom, from(rgba(138,124,22
 .catBooks .categoryIndicator {
 	background-image: url("../images/categoriesSmall/booksSmall.png");
 }
-.catCurator .categoryIndicator {
+.catCuratorsChoice .categoryIndicator {
 	background-image: url("../images/categoriesSmall/curatorSmall.png");
 }
-.catRevisions .categoryIndicator {
+.catRevisionistHistory .categoryIndicator {
 	background-image: url("../images/categoriesSmall/revisionsSmall.png");
 }
 .catBusiness .categoryIndicator {

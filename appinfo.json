@@ -1,6 +1,6 @@
 {
 	"id": "com.palm.app-museum2",
-	"version": "2.6.6",
+	"version": "2.6.7",
 	"vendor": "codepoet80",
 	"type": "web",
 	"main": "index.html",
@@ -12,7 +12,7 @@
 	"keywords": ["Archive", "Catalog", "Museum"],
 	"universalSearch":{
 						"search":{
-									"displayName": "WebOS App Museum",
+									"displayName": "WebOS App Museum II",
 									"url":"nl.banneret.app-museum",
 									"launchParam":{"common":{"sceneType":"search","params":{"type":"query","search":"#{searchTerms}"}}}
 								}
