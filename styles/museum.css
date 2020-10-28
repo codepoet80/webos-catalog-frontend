@@ -332,7 +332,10 @@ background: -webkit-gradient(linear, left top, left bottom, from(rgba(138,124,22
 }
 .factsArea {
 	padding: 6px 4px;
-	color: rgba(0,0,0,0.55) !important;
+	padding-left: 10px;
+	color: black !important;
+	background-color:darkgray;
+	border-top:2px solid white;
 	font-size: 16px;
 	text-decoration: none;
 }
@@ -341,7 +344,14 @@ background: -webkit-gradient(linear, left top, left bottom, from(rgba(138,124,22
 	font-size: 18px;
 	text-decoration: none;
 }
+.linkString {
+	font-size: 8px;
+	font-family: "PreludeWGL Bold";
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 .copyright {
+	margin-top: 2px;
 	font-size: 14px;
 	font-family: "PreludeWGL Bold";
 	overflow: hidden;
@@ -356,11 +366,16 @@ background: -webkit-gradient(linear, left top, left bottom, from(rgba(138,124,22
 	padding-top: 12px;
 	margin-bottom: 12px;
 }
+.starRatings
+{
+	margin-top:8px;
+}
 .media {
 	height: 90px;
 	width: 120px;
 	background-size: 100%;
 	margin-right: 8px;
+	visibility: collapse;
 }
 .appFooter {
 	background-color: rgba(0,0,0,0.1);

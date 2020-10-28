@@ -1,6 +1,6 @@
 {
 	"id": "com.palm.app-museum2",
-	"version": "2.6.7",
+	"version": "2.7.0",
 	"vendor": "codepoet80",
 	"type": "web",
 	"main": "index.html",
@@ -9,11 +9,11 @@
 	"splashicon": "icon-256x256.png",
 	"splashBackground":"images/splash-screenshot-default.png",
 	"uiRevision":2,
-	"keywords": ["Archive", "Catalog", "Museum"],
+	"keywords": ["Archive", "Catalog", "Museum", "Apps"],
 	"universalSearch":{
 						"search":{
 									"displayName": "WebOS App Museum II",
-									"url":"nl.banneret.app-museum",
+									"url":"appcatalog.webosarchive.com",
 									"launchParam":{"common":{"sceneType":"search","params":{"type":"query","search":"#{searchTerms}"}}}
 								}
 					}
