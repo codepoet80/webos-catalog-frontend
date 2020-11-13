@@ -32,7 +32,7 @@ html {
 }
 
 .enyo-held {
-background: -webkit-gradient(linear, left top, left bottom, from(rgba(138,124,222,1)), to(rgba(52,29,189,0.8)));
+background: -webkit-gradient(linear, left top, left bottom, from(rgba(225,190,158,1)), to(rgba(241,99,33,0.8)));
 }
 
 .enyo-button.enyo-button-light.bookmarkButton .bookmarkInner {
@@ -59,7 +59,7 @@ background: -webkit-gradient(linear, left top, left bottom, from(rgba(138,124,22
 }
 
 .palmOrange {
-	color: rgb(52,29,189);
+	color: rgb(224,108,55);
 }
 .palmAccent {
 	font-weight: bold;
@@ -90,12 +90,6 @@ background: -webkit-gradient(linear, left top, left bottom, from(rgba(138,124,22
 }
 .catBooks .categoryIndicator {
 	background-image: url("../images/categoriesSmall/booksSmall.png");
-}
-.catCuratorsChoice .categoryIndicator {
-	background-image: url("../images/categoriesSmall/curatorSmall.png");
-}
-.catRevisionistHistory .categoryIndicator {
-	background-image: url("../images/categoriesSmall/revisionsSmall.png");
 }
 .catBusiness .categoryIndicator {
 	background-image: url("../images/categoriesSmall/businessSmall.png");
@@ -332,10 +326,7 @@ background: -webkit-gradient(linear, left top, left bottom, from(rgba(138,124,22
 }
 .factsArea {
 	padding: 6px 4px;
-	padding-left: 10px;
-	color: black !important;
-	background-color:darkgray;
-	border-top:2px solid white;
+	color: rgba(0,0,0,0.55) !important;
 	font-size: 16px;
 	text-decoration: none;
 }
@@ -344,14 +335,7 @@ background: -webkit-gradient(linear, left top, left bottom, from(rgba(138,124,22
 	font-size: 18px;
 	text-decoration: none;
 }
-.linkString {
-	font-size: 8px;
-	font-family: "PreludeWGL Bold";
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
 .copyright {
-	margin-top: 2px;
 	font-size: 14px;
 	font-family: "PreludeWGL Bold";
 	overflow: hidden;
@@ -366,16 +350,11 @@ background: -webkit-gradient(linear, left top, left bottom, from(rgba(138,124,22
 	padding-top: 12px;
 	margin-bottom: 12px;
 }
-.starRatings
-{
-	margin-top:8px;
-}
 .media {
 	height: 90px;
 	width: 120px;
 	background-size: 100%;
 	margin-right: 8px;
-	visibility: collapse;
 }
 .appFooter {
 	background-color: rgba(0,0,0,0.1);
@@ -490,7 +469,7 @@ background: -webkit-gradient(linear, left top, left bottom, from(rgba(138,124,22
 .receivingDataBar {
 	height: 32px;
 	pointer-events: none;
-	background: -webkit-gradient(linear, left top, left bottom, from(rgba(138,124,222,1)), to(rgba(52,29,189,0.8)));
+	background: -webkit-gradient(linear, left top, left bottom, from(rgba(225,190,158,1)), to(rgba(241,99,33,0.8)));
 	overflow: hidden;
 	border-top: 1px solid #a9a9a9;
 	box-sizing: border-box;

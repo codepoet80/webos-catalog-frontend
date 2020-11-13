@@ -194,7 +194,7 @@ enyo.kind({
                                         {
                                         	kind: "IconButton",
                                         	name: "randomButton",
-                                        	style: "background-color: rgb(62,11,249); color: white;",
+                                        	style: "background-color: rgb(224,108,55); color: white;",
                                         	icon: "images/randomCard.png",
                                         	onclick: "handleRandomButton"
                                         }

@@ -45,16 +45,14 @@ enyo.kind({
                                 {kind: "Image", name: "appIcon", height: "64px", width: "64px"},
                                 {layoutKind: "VFlexLayout", width:"100%", components: [
                                     {name: "appName", className:  "appNameDetail"},
-                                    {
+                                   {
                                         layoutKind: "HFlexLayout", components: [
                                             {kind: "Image", name: "vendorLogo", showing: false, className: "vendorLogo noLogo detailLogo"},
                                             {width: "6px"},
                                             {name: "appMaker", className: "appMakerDetail", flex:1},
-                                            {kind: "Image", name: "ratingImage", showing: true, className: "starRatings"},
-                                            {width: "6px"},
                                             {kind: "IconButton",
                                              name: "fetchButton",
-                                             style: "background-color: rgb(86,68,195); color: white;",
+                                             style: "background-color: rgb(224,108,55); color: white;",
                                              icon: "images/fetchFromArchive.png",
                                              onclick: "handleFetch"
                                             }
@@ -69,7 +67,46 @@ enyo.kind({
                                         {name: "screenshot1", className: 'screenshot screenshot1'},
                                         {name: "screenshot2", className: 'screenshot screenshot2'},
                                         {name: "screenshot3", className: 'screenshot screenshot3'}
-                                    ]}
+                                    ]},
+                                    {
+                                        name: "factsArea",
+                                        className: "screenshotArea factsArea",
+                                        layoutKind: "VFlexLayout",
+                                        components: [
+                                            {name: "homepage",  className:"linkString", kind: "HtmlContent", content: "<a href=''>Homepage</a>", address: "", onLinkClick: "handleRedirection"},
+                                            {name: "email",     className:"linkString", kind: "HtmlContent", content: "<a href=''>Support eMail</a>", address: "", onLinkClick: "handleRedirection"},
+                                            {name: "copyright", className:"copyright"},
+                                            {height: "16px;"},
+                                            {name: "version"},
+                                            {name: "appid"},
+                                            {name: "app"},
+                                            {height: "16px;"},
+                                            {name: "downloadSize"},
+                                            {layoutKind: "HFlexLayout", components: [
+                                                {name: "showMedia", kind: "HtmlContent", className: "media", onclick: "handleRedirection"},
+                                                {layoutKind: "VFlexLayout", components: [
+                                                    {layoutKind: "HFlexLayout", components: [
+                                                        {name: "price", className: "price"},
+                                                        {name: "adds",  className: "adds"}
+                                                    ]},
+                                                    {layoutKind: "HFlexLayout", components: [
+                                                        {
+                                                            kind: "Button",
+                                                            caption: "more apps",
+                                                            onclick: "showMoreCompany"
+                                                        },
+                                                        {
+                                                            kind: "Button",
+                                                            name: "blacklist",
+                                                            caption: "hide vendor",
+                                                            toggling: "true",
+                                                            onclick: "addToBlacklist"
+                                                        }
+                                                    ]},
+                                                ]}
+                                            ]}
+                                        ]
+                                    }
                             ]
                         },
                         {
@@ -89,45 +126,6 @@ enyo.kind({
                         },
                         {
                             kind: "Spacer", flex: 1
-                        },
-                        {
-                            name: "factsArea",
-                            className: "screenshotArea factsArea",
-                            layoutKind: "VFlexLayout",
-                            components: [
-                                {name: "homepage",  className:"linkString", kind: "HtmlContent", content: "<a href=''>Homepage</a>", address: "", onLinkClick: "handleRedirection"},
-                                {name: "email",     className:"linkString", kind: "HtmlContent", content: "<a href=''>Support eMail</a>", address: "", onLinkClick: "handleRedirection"},
-                                {name: "copyright", className:"copyright"},
-                                {height: "16px;"},
-                                {name: "version"},
-                                {name: "appid"},
-                                {name: "app"},
-                                {height: "16px;"},
-                                {name: "downloadSize"},
-                                {layoutKind: "HFlexLayout", components: [
-                                    {name: "showMedia", kind: "HtmlContent", className: "media", onclick: "handleRedirection"},
-                                    {layoutKind: "VFlexLayout", components: [
-                                        {layoutKind: "HFlexLayout", components: [
-                                            {name: "price", className: "price"},
-                                            {name: "adds",  className: "adds"}
-                                        ]},
-                                        {layoutKind: "HFlexLayout", components: [
-                                            {
-                                                kind: "Button",
-                                                caption: "more apps",
-                                                onclick: "showMoreCompany"
-                                            },
-                                            {
-                                                kind: "Button",
-                                                name: "blacklist",
-                                                caption: "hide vendor",
-                                                toggling: "true",
-                                                onclick: "addToBlacklist"
-                                            }
-                                        ]},
-                                    ]}
-                                ]}
-                            ]
                         },
                         {
                             layoutKind: "HFlexLayout",
@@ -269,19 +267,7 @@ enyo.kind({
         	this.$.appName.setContent(banneret.cleanText(myApp.title));
         	this.$.appMaker.setContent(banneret.cleanText(myApp.author));
             this.$.vendorLogo.setAttribute("vendorletter", myApp.author[0]);
-            this.$.vendorLogo.setSrc("https://appcatalog.webosarchive.com/WebService/getVendorIcon.php?url="+(myApp.detail.homeURL || myApp.detail.supportURL));
-
-            if (myApp.detail.starRating != null && myApp.detail.starRating > 0)
-            {
-                var r = myApp.detail.starRating;
-                this.$.ratingImage.setSrc("images/star-" + r + ".png");
-                console.log("adding star rating " + r);
-            }
-            else
-            {
-                this.$.ratingImage.setSrc("images/star-0.png");
-                console.log("removing star rating");
-            }
+            this.$.vendorLogo.setSrc("https://www.banneret.nl/_webos/getVendorIcon.php?url="+(myApp.detail.homeURL || myApp.detail.supportURL));
 
             this.$.description.setContent(banneret.cleanText(myApp.detail.description).replace("\n","<br>"));
             this.$.versionNotes.setContent(banneret.cleanText(myApp.detail.versionNote).replace("\n","<br>"));
@@ -338,15 +324,12 @@ enyo.kind({
             this.$.screenshot3.removeClass(screenshots[2].orientation === 'P' ? 'landscape' : 'portrait');
 
             this.$.homepage.address = myApp.detail.homeURL;
-            this.$.homepage.setContent("<a href='" + myApp.detail.homeURL + "'>" + myApp.detail.homeURL + "</a>");
             this.$.email.address    = "mailto://" + myApp.detail.custsupportemail;
-            this.$.email.setContent("<a href='mailto:" + myApp.detail.custsupportemail + "'>" + myApp.detail.custsupportemail + "</a>");
             this.$.copyright.setContent(myApp.detail.copyright);
 
             this.$.version.setContent("version: " + myApp.detail.version);
             this.$.appid.setContent("appId: " + myApp.id);
             this.$.app.setContent("app: " + myApp.detail.publicApplicationId);
-
             this.$.downloadSize.setContent("filesize: ~" + (myApp.detail.appSize/1048576).toFixed(1) + "MB");
 
             if (banneret.getPrefs("showPrice") === true) {
@@ -403,6 +386,7 @@ enyo.kind({
                 this.$.blacklist.addStyles("text-decoration: line-through;");
             }
 
+            console.log(myApp);
         }.bind(this);
 
         if (myApp) {

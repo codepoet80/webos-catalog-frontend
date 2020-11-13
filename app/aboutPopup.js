@@ -29,13 +29,13 @@ enyo.kind({
                         {kind: "Image", src: "./images/WebOSMuseumLogo.png", width: "128px", height: "128px"},
                         {kind: "Spacer"}
                     ]},
-                    {content: "<span class='palmOrange'>web</span><span class='palmAccent'>OS App Museum II</span> is part of <span class='palmOrange'>web</span><span class='palmAccent'>OS Archive</span>; a zero-profit (non-commercial) community-driven initiative to archive, and where possible provide access to, legacy <span class='palmOrange'> web</span><span class='palmAccent'>OS</span> functionality and information.<p>One of its main goals is to provide <span class='palmOrange'>web</span><span class='palmAccent'>OS</span>-users with functionality of the device as originally intended (when <span class='palmOrange'>web</span><span class='palmAccent'>OS</span> was created/the device was sold)."},
+                    {content: "The <span class='palmOrange'>Web</span><span class='palmAccent'>OS App Museum</span> is part of the <span class='palmOrange'>web</span><span class='palmAccent'>OS museum</span>; a zero-profit (non-commercial) community-driven initiative to archive, and where possible provide access to, legacy <span class='palmOrange'><span class='palmAccent'>Palm</span> web</span><span class='palmAccent'>OS</span> functionality and information.<p>One of its main goals is to provide <span class='palmOrange'>web</span><span class='palmAccent'>OS</span>-users with functionality of the device as originally intended (when <span class='palmOrange'>web</span><span class='palmAccent'>OS</span> was created/the device was sold)."},
                     {layoutKind: "HFlexLayout", components: [
                         {kind: "Spacer"},
                         {kind: "Image", src: "./images/WebOSAppMuseumLogo.png", width: "128px", height: "128px"},
                         {kind: "Spacer"}
                     ]},
-                    {content: "This app is an exhibition of applications originally available to the platform. <span class='palmOrange'>web</span><span class='palmAccent'>OS Archive</span> provides these apps under Fair Use provisions as digital archives for historical purposes through <span class='palmOrange'>web</span><span class='palmAccent'>OS App Museum II</span>. If you have questions or comments, or to submit a take down request for IP you own the rights for, please email: <span class='palmOrange'><a href='mailto:curator@webosarchive.com'>curator@webosarchive.com</a></span>."},
+                    {content: "This app is an exhibition of applications originally available to the platform. The <span class='palmOrange'>Web</span><span class='palmAccent'>OS App Museum</span> does not host these apps itself, but relies on other community driven archival initiatives."},
                 ]},
                 {kind: "Control"},
                 {

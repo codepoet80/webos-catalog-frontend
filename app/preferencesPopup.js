@@ -779,7 +779,7 @@ enyo.kind({
 
             setTimeout(function() {
                 this.$.blacklistList.prepareRow(inIndex);
-                this.$.vendorLogo.setSrc("https://appcatalog.webosarchive.com/WebService/getVendorIcon.php?url="+blacklist[inIndex].homepage);
+                this.$.vendorLogo.setSrc("https://www.banneret.nl/_webos/getVendorIcon.php?url="+blacklist[inIndex].homepage);
             }.bind(this), 4000 + (inIndex*500));
 
             return true;

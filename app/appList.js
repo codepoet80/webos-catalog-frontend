@@ -344,7 +344,7 @@ enyo.kind({
                 }
 
                 if (this._categories[appItem.category] === undefined) {
-                    this._categories[appItem.category] = "cat"+appItem.category.replace(/\s/g, "").replace("&","").replace("'", "");
+                    this._categories[appItem.category] = "cat"+appItem.category.replace(/\s/g, "").replace("&","");
                 }
                 className.push(this._categories[appItem.category]);
 
