@@ -11,7 +11,7 @@ Updater Model - Mojo
 */
 
 var UpdaterModel = function() {
-    this.updateURL = "http://appcatalog.webosarchive.com/WebService/getLatestVersionInfo.php?";
+    this.updateURL = "http://appcatalog.webosarchive.com/WebService/getLatestVersionInfo.php?app=";
     this.lastUpdateResponse = null;
 };
 
