@@ -73,7 +73,7 @@ UpdaterModel.prototype.PromptUserForUpdate = function(callback, message) {
         Mojo.Log.warn("UpdaterModel: Not prompting user for update when no update has been discovered.");
     } else {
         if (!message)
-            message = "There's a new version of " + Mojo.Controller.appInfo.title + " available! <br>" + this.lastUpdateResponse.versionNote + "<br>Do you want to update now?";
+            message = "An update for " + Mojo.Controller.appInfo.title + " was found in App Museum II. Do you want to update now?! <br>" + this.lastUpdateResponse.versionNote + "<br>Do you want to update now?";
 
         var stageController = Mojo.Controller.getAppController().getActiveStageController();
         if (stageController) {
@@ -90,7 +90,7 @@ UpdaterModel.prototype.PromptUserForUpdate = function(callback, message) {
                         callback(value);
                 },
                 allowHTMLMessage: true,
-                title: $L("Update Found!"),
+                title: $L("Update Available!"),
                 message: $L(message),
                 choices: [
                     { label: $L('Update Now'), value: true, type: 'affirmative' },

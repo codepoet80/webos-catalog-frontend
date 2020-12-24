@@ -36,7 +36,7 @@ enyo.kind({
             layoutKind: "VFlexLayout",
             style: "width: 80%;height:210px",
             components: [
-                { content: "<b>Update Available</b>" },
+                { content: "<b>Update Available!</b>" },
                 {
                     kind: "BasicScroller",
                     flex: 1,
@@ -78,7 +78,7 @@ enyo.kind({
         if (!this.lastUpdateResponse || !this.lastUpdateResponse.downloadURI) {
             enyo.warn("Updater Helper: Not performing update when no update has been discovered.");
         } else {
-            enyo.log("I should do an update for: " + JSON.stringify(this.lastUpdateResponse));
+            enyo.log("Updater Helper doing update for: " + JSON.stringify(this.lastUpdateResponse));
             this.$.serviceRequest.call({ id: "org.webosinternals.preware", params: { type: "install", file: this.lastUpdateResponse.downloadURI } });
         }
     },
@@ -86,7 +86,6 @@ enyo.kind({
         this.$.updatePopUp.close();
     },
     updateCheckSuccess: function(inSender, inResponse, inRequest) {
-        enyo.log("got success from update check: " + JSON.stringify(inResponse));
         var currVersion = enyo.fetchAppInfo().version;
         enyo.log("Updater Helper found Current version: " + currVersion + ", Update version: " + inResponse.version);
         currVersion = this.getVersionObject(currVersion);
