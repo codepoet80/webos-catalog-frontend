@@ -1,3 +1,13 @@
+/*
+Updater Helper - Enyo
+ Version 0.1
+ Created: 2020
+ Author: Jonathan Wise
+ License: MIT
+ Description: A helper to check for and get updates from App Museum II web service.
+    Does not require App Museum to be installed, but does require internet access, and Preware to do the actual install.
+*/
+
 enyo.kind({
     name: "Helpers.Updater",
     kind: "Control",

@@ -1,5 +1,5 @@
 /*
-Updater Model
+Updater Model - Mojo
  Version 0.2
  Created: 2020
  Author: Jonathan Wise
