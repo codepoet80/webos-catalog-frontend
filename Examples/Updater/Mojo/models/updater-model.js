@@ -102,7 +102,7 @@ UpdaterModel.prototype.PromptUserForUpdate = function(callback, message) {
 //Ask Preware to actually install the update...
 UpdaterModel.prototype.InstallUpdate = function(callBack) {
     if (!this.lastUpdateResponse) {
-        Mojo.Log.warn("UpdaterModel: Not prompting user for update when no update has been discovered.");
+        Mojo.Log.warn("UpdaterModel: Not performing update when no update has been discovered.");
     } else {
         var app = this.lastUpdateResponse.downloadURI;
         Mojo.Log.info("Asking PreWare to perform update to " + app);
