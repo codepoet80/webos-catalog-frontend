@@ -30,13 +30,16 @@ enyo.kind({
                     kind: "Control",
                     layoutKind: "HFlexLayout",
                     name: "devices",
+                    domStyles: { "padding-right": "6px"},
                     components: [
                         { kind: "Control", name: "Pre", className: "preIcon" },
                         { kind: "Control", name: "Pixi", className: "pixiIcon" },
                         { kind: "Control", name: "Pre2", className: "pre2Icon" },
                         { kind: "Control", name: "Veer", className: "veerIcon" },
                         { kind: "Control", name: "Pre3", className: "pre3Icon" },
-                        { kind: "Control", name: "TouchPad", className: "touchpadIcon" },
+                        { kind: "Control", name: "TouchPad", className: "touchpadIcon", components: [
+                            { kind: "Image", name:"LuneOS", className: "luneOSIcon", src: "images/devices/LuneOS.png" }
+                        ] },
                     ]
                 }
             ]
@@ -303,6 +306,7 @@ enyo.kind({
             setClass(this.$.Veer, 'activeDeviceIcon', myApp.Veer);
             setClass(this.$.Pre3, 'activeDeviceIcon', myApp.Pre3);
             setClass(this.$.TouchPad, 'activeDeviceIcon', myApp.TouchPad);
+            setClass(this.$.LuneOS, 'activeLuneIcon', myApp.LuneOS);
 
             var categories = banneret.getGlobal("categories");
             categories.forEach(function(cat, idx, arr) {

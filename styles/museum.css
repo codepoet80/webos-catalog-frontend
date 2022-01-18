@@ -190,12 +190,22 @@ background: -webkit-gradient(linear, left top, left bottom, from(rgba(138,124,22
 .touchpadIcon {
 	height: 50px;
 	width: 62px;
+	z-index: 1;
 	background-position: 0 -51px;
 	background-repeat: no-repeat;
 	background-image: url(../images/devices/TouchPad.png);
 }
+.luneOSIcon {
+	z-index: 5;
+	margin-left: 40px;
+	padding-top: 20px;
+	display:none;
+}
 .activeDeviceIcon {
 	background-position: 0 -1px;
+}
+.activeLuneIcon {
+	display:inline;
 }
 .categoryIconDetails {
 	height: 48px;
