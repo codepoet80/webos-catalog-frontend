@@ -497,8 +497,11 @@ enyo.kind({
 
         var login = [username, password].join(":") + "@";
         var app = protocol + (banneret.getPrefs("archiveFTP") ? login : "") + URI + "/" + filename;
-
-        this.$.serviceRequest.call({ id: "org.webosinternals.preware", params: { type: "install", file: app } });
+        if (window.location.hostname.indexOf(".media.cryptofs.apps") != -1) {
+            this.$.serviceRequest.call({ id: "org.webosinternals.preware", params: { type: "install", file: app } });
+        } else {
+            document.location = app;
+        }
     },
     handleShowImages: function() {
         this.doShowImages(this.getImageList());

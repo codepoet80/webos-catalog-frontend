@@ -48,6 +48,10 @@ enyo.kind({
         }
     },
 
+    InstallViaPreware: function(app) {
+        this.$.installRequest.call({ id: "org.webosinternals.preware", params: { type: "install", file: app } });
+    },
+
     PromptUserForUpdate: function(message) {
         if (this.lastUpdateResponse == null) {
             enyo.log("Updater Helper: Not prompting user for update when no update has been discovered.");
@@ -167,7 +171,7 @@ enyo.kind({
             enyo.warn("Updater Helper: Not performing update when no update has been discovered.");
         } else {
             enyo.log("Updater Helper doing update for: " + JSON.stringify(this.lastUpdateResponse));
-            this.$.installRequest.call({ id: "org.webosinternals.preware", params: { type: "install", file: this.lastUpdateResponse.downloadURI } });
+            this.InstallViaPreware(this.lastUpdateResponse.downloadURI);
         }
     },
 
