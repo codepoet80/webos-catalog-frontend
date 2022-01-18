@@ -16,7 +16,7 @@ enyo.kind({
     sender: null,
     published: {
         OnUpdateResponse: function(sender, message) { this.PromptUserForUpdate(message) },
-        lastUpdateResponse: null,
+        LastUpdateResponse: null,
         deviceId: null,
         appName: null
     },
@@ -49,7 +49,7 @@ enyo.kind({
     },
 
     PromptUserForUpdate: function(message) {
-        if (this.lastUpdateResponse == null) {
+        if (this.LastUpdateResponse == null) {
             enyo.log("Updater Helper: Not prompting user for update when no update has been discovered.");
         } else {
             if (!message)
@@ -147,7 +147,7 @@ enyo.kind({
         enyo.log("Updater Helper found Current version: " + currVersion + ", Update version: " + inResponse.version);
         currVersion = this.getVersionObject(currVersion);
         if (inResponse.version != null) {
-            this.lastUpdateResponse = inResponse;
+            this.LastUpdateResponse = inResponse;
             var museumVersion = this.getVersionObject(inResponse.version);
             if (this.isVersionHigher(currVersion, museumVersion)) {
                 enyo.log("Updater Helper found an update in webOS App Museum II!");
@@ -167,11 +167,11 @@ enyo.kind({
 
     updateConfirmClick: function() {
         this.$.updatePopUp.close();
-        if (!this.lastUpdateResponse || !this.lastUpdateResponse.downloadURI) {
+        if (!this.LastUpdateResponse || !this.LastUpdateResponse.downloadURI) {
             enyo.warn("Updater Helper: Not performing update when no update has been discovered.");
         } else {
-            enyo.log("Updater Helper doing update for: " + JSON.stringify(this.lastUpdateResponse));
-            this.InstallViaPreware(this.lastUpdateResponse.downloadURI);
+            enyo.log("Updater Helper doing update for: " + JSON.stringify(this.LastUpdateResponse));
+            this.InstallViaPreware(this.LastUpdateResponse.downloadURI);
         }
     },
 
