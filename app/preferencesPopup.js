@@ -150,6 +150,37 @@ enyo.kind({
                                 },
                             ]
                         },
+                        
+                        {
+                            kind: "HFlexBox",
+                            align: "center",
+                            tapHighlight: false,
+                            components: [
+                                {
+                                    layoutKind: "HFlexLayout",
+                                    flex:1,
+                                    components: [
+                                        {
+                                            content: "Show Adult Apps",
+                                            className: "enyo-label",
+                                        },
+                                        {name: "resetIconBS",className: "resetAppIcon"},
+                                    ]
+                                },
+                                {
+                                    kind: "ToggleButton",
+                                    name: "showAdultToggle",
+                                    state: false,
+                                    onLabel: "yes",
+                                    offLabel: "no",
+                                    onChange: "toggleAdult"
+                                },
+                            ]
+                        },
+                        {
+                            content: "The App Catalog never allowed actual adult content, but did include a number of suggestive apps that are filtered out by default (they're sexist, and don't work any more anyway.)",
+                            className: "appFooter"
+                        },
                         {
                             kind: "HFlexBox",
                             align: "center",
@@ -370,7 +401,7 @@ enyo.kind({
                                 {
                                     kind: "HFlexBox",
                                     flex: 1,
-                                    name: "accelerationToggleArea",
+                                    name: "blacklistToggleArea",
                                     components: [
                                         {kind: "Spacer"},
                                         {
@@ -624,6 +655,7 @@ enyo.kind({
         this.$.appIconSizeSelector.setValue(prefs.appIconSize);
         this.$.categoryIconSizeSelector.setValue(prefs.catIconSize);
         this.$.showPriceToggle.setState(prefs.showPrice);
+        this.$.showAdultToggle.setState(prefs.showAdult);
         this.$.showRandomAppToggle.setState(prefs.showRandomApp);
         this.$.showRandomAppButtonToggle.setState(prefs.showRandomAppButton);
         this.$.loadIconWhileScrollingToggle.setState(!!prefs.loadIconsWhileScrolling);
@@ -700,6 +732,12 @@ enyo.kind({
     },
     togglePrice: function (inSender, inEvent) {
         banneret.setPref("showPrice", inEvent);
+        if (enyo.$.museumApp.$.details && enyo.$.museumApp.$.details.getAppId()) {
+            enyo.$.museumApp.$.details.getAppBySelectedId();
+        }
+    },
+    toggleAdult: function (inSender, inEvent) {
+        banneret.setPref("showAdult", inEvent);
         if (enyo.$.museumApp.$.details && enyo.$.museumApp.$.details.getAppId()) {
             enyo.$.museumApp.$.details.getAppBySelectedId();
         }

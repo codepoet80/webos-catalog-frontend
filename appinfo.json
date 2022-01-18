@@ -1,7 +1,7 @@
 {
     "id": "com.palm.app-museum2",
-    "version": "2.7.2",
-    "versionNote": "Improves resiliency by de-coupling webservice from content.",
+    "version": "2.8.0",
+    "versionNote": "Adult filters and LuneOS support",
     "lastModifiedTime": "2020-12-04T13:04:48-04:00",
     "vendor": "codepoet80",
     "type": "web",

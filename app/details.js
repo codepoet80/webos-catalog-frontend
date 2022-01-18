@@ -320,10 +320,10 @@ enyo.kind({
             if (myApp.detail.starRating != null && myApp.detail.starRating > 0) {
                 var r = myApp.detail.starRating;
                 this.$.ratingImage.setSrc("images/star-" + r + ".png");
-                console.log("adding star rating " + r);
+                //console.log("adding star rating " + r);
             } else {
                 this.$.ratingImage.setSrc("images/star-0.png");
-                console.log("removing star rating");
+                //console.log("removing star rating");
             }
 
             this.$.description.setContent(banneret.cleanText(myApp.detail.description).replace("\n", "<br>"));

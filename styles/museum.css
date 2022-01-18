@@ -206,7 +206,7 @@ background: -webkit-gradient(linear, left top, left bottom, from(rgba(138,124,22
 
 .appNameDetail {
 	font-size:32px;
-	font-family: "PreludeWGL Light";
+	font-family: "PreludeWGL Light, Arial, Helvetica, sans-serif";
 	overflow: hidden;
 	margin-right: 10px;
 	margin-left: 6px;
@@ -219,7 +219,7 @@ background: -webkit-gradient(linear, left top, left bottom, from(rgba(138,124,22
 }
 .appMakerDetail {
 	font-size:16px;
-	font-family: "PreludeWGL Bold";
+	font-family: "PreludeWGL Bold, Arial, Helvetica, sans-serif";
 	overflow: hidden;
 	margin-right: 10px;
 	overflow: hidden;
@@ -395,6 +395,7 @@ background: -webkit-gradient(linear, left top, left bottom, from(rgba(138,124,22
 	margin: 4px 8px 0 0;
 	width: 32px;
 	height: 32px;
+	-webkit-border-radius: 4px;
 }
 .vendorLogo.noLogo {
 	content: "";

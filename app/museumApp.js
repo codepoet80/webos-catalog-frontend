@@ -150,6 +150,7 @@ enyo.kind({
 													className: "appFooterSelectorOnLight",
 													items: [
 														{caption: $L("All"), value: "All"},
+														{caption: $L("LuneOS"), value: "LuneOS"},
 														{caption: $L("TouchPad Exclusive"), value: "touchpad_exclusive"},
 														{caption: $L("TouchPad"), value: "TouchPad"},
 														{caption: $L("HP Pre3"), value: "Pre3"},

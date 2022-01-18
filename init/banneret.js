@@ -102,14 +102,15 @@ banneret.factory_settings = {
     masterPage: "getMuseumMaster",
     showPrice: false,
     showRandomApp: false,
-    showRandomButton: true,
+    showRandomButton: false,
     prefetchSize: 2,
     liveSearch: false,
     liveSearchThreshold: "6",
     indicateArchive: false,
     onlyArchived: false,
     backendVersion: "", // "", "_beta", or "_alpha"
-    blacklistButton: false
+    blacklistButton: false,
+    showAdult:false
 };
 
 banneret.getSessionKey = function() {
@@ -315,10 +316,12 @@ banneret.getMuseumList = function(settings, onSuccess, onError) {
         })
         settings.blacklist = bList.join(",");
     }
+    //settings.adult = "false";    //TODO: Make this a setting
 
     banneret.WebService = banneret.WebService || enyo.$.museumApp.$.MasterWebService;
     settings.key = banneret.getSessionKey();
     settings.hide_missing = banneret.getPrefs("onlyArchived");
+    settings.adult = banneret.getPrefs("showAdult");
 
     if (typeof settings.category !== "string") {
         settings.category = banneret.getCategoryLabel(settings.category);
@@ -333,6 +336,7 @@ banneret.getMuseumList = function(settings, onSuccess, onError) {
     });
 
     var callString = JSON.stringify(settings);
+    console.log("*** callString is: " + callString);
     if (museumCalls[callString] === null) {
         return; // we know this call has been made, but the reponse is still pending.
         // thre is no need to make the call again.
