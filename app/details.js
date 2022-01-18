@@ -319,7 +319,7 @@ enyo.kind({
             this.$.appName.setContent(banneret.cleanText(myApp.title));
             this.$.appMaker.setContent(banneret.cleanText(myApp.author));
             this.$.vendorLogo.setAttribute("vendorletter", myApp.author[0]);
-            this.$.vendorLogo.setSrc("https://appcatalog.webosarchive.com/WebService/getVendorIcon.php?url=" + (myApp.detail.homeURL || myApp.detail.supportURL));
+            this.$.vendorLogo.setSrc("http://appcatalog.webosarchive.com/WebService/getVendorIcon.php?url=" + (myApp.detail.homeURL || myApp.detail.supportURL));
 
             if (myApp.detail.starRating != null && myApp.detail.starRating > 0) {
                 var r = myApp.detail.starRating;

@@ -6,6 +6,7 @@ enyo.kind({
 	_position: {},
 	_touchpad: banneret.getGlobal("isTouchpad"),
 	components: [
+		{kind: "Helpers.Updater", name: "SelfUpdater" },
 		{
 			name: "MasterWebService",
 			kind: "WebService",
@@ -239,6 +240,8 @@ enyo.kind({
 
 		this.inherited(arguments);
 
+		this.$.SelfUpdater.CheckForUpdate(this, "app museum 2", this.updateResponseCallBack);
+
 		document.addEventListener("keydown", this.showSearchBar);
 
 		this.setPeekWidth();
@@ -249,6 +252,11 @@ enyo.kind({
 		} else {
 			this.addClass("");
 		}
+	},
+	updateResponseCallBack: function(self, message) {
+		//Included as an example of controlling the update flow, but usually its safe just to let the Update helper to handle everything
+		enyo.log("Got an updater response: " + message);
+		self.$.SelfUpdater.PromptUserForUpdate(message);
 	},
 	rendered: function () {
 		this.inherited(arguments);

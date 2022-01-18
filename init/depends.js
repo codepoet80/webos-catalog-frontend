@@ -1,4 +1,5 @@
 enyo.depends(
 	'banneret.js',
-	'museum.js'
+	'museum.js',
+	'updater.js'
 );

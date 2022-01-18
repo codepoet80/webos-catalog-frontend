@@ -28,7 +28,7 @@ banneret.global.categories = [
     { id: 20, label: "Sports", iconLocation: "category-icons/sports/" },
     { id: 21, label: "Travel", iconLocation: "category-icons/travel/" },
     { id: 22, label: "Weather", iconLocation: "category-icons/weather/" },
-    { id: 23, label: "Missing Apps", iconLocation: "category-icons/missing/" }
+    /*{ id: 23, label: "Missing Apps", iconLocation: "category-icons/missing/" }*/
 ];
 
 banneret.global.prefCookie = 'banneretAppMuseum';
@@ -322,6 +322,7 @@ banneret.getMuseumList = function(settings, onSuccess, onError) {
     settings.key = banneret.getSessionKey();
     settings.hide_missing = banneret.getPrefs("onlyArchived");
     settings.adult = banneret.getPrefs("showAdult");
+    settings.museumVersion = enyo.fetchAppInfo().version;
 
     if (typeof settings.category !== "string") {
         settings.category = banneret.getCategoryLabel(settings.category);
