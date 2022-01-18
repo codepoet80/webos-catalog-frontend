@@ -387,7 +387,7 @@ enyo.kind({
 
             this.$.homepage.address = myApp.detail.homeURL;
             this.$.homepage.setContent("<a href='" + myApp.detail.homeURL + "'>" + myApp.detail.homeURL + "</a>");
-            this.$.email.address = "mailto://" + myApp.detail.custsupportemail;
+            this.$.email.address = "mailto:" + myApp.detail.custsupportemail;
             this.$.email.setContent("<a href='mailto:" + myApp.detail.custsupportemail + "'>" + myApp.detail.custsupportemail + "</a>");
             this.$.copyright.setContent(myApp.detail.copyright);
 
