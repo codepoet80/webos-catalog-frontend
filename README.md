@@ -4,6 +4,8 @@
 
 Enyo-based App Catalog for legacy webOS, forked from App Museum. You can use this app on a Pre3 or Touchpad, or access the catalog in a browser at [http://appcatalog.webosarchive.com](http://appcatalog.webosarchive.com)
 
+Back-end is here: [https://github.com/codepoet80/webos-catalog-backend](https://github.com/codepoet80/webos-catalog-backend)
+
 ## What is This?
 
 This is an app for the defunct mobile webOS platform, made by Palm and later acquired by HP. It runs on devices like the Palm Pre or Pixi, or the HP
