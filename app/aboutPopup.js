@@ -35,6 +35,7 @@ enyo.kind({
                         {kind: "Image", src: "./images/WebOSAppMuseumLogo.png", width: "128px", height: "128px"},
                         {kind: "Spacer"}
                     ]},
+                    { w: "fill", name: "versionNum", domStyles: {"text-align": "center", "font-weight": "bold"}, content: "Version" },
                     {content: "This app is an exhibition of applications originally available to the platform. <span class='palmOrange'>web</span><span class='palmAccent'>OS Archive</span> provides these apps under Fair Use provisions as digital archives for historical purposes through <span class='palmOrange'>web</span><span class='palmAccent'>OS App Museum II</span>. If you have questions or comments, or to submit a take down request for IP you own the rights for, please email: <span class='palmOrange'><a href='mailto:curator@webosarchive.com'>curator@webosarchive.com</a></span>."},
                 ]},
                 {kind: "Control"},
@@ -62,6 +63,7 @@ enyo.kind({
     rendered: function () {
         this.inherited(arguments);
         var isTouchpad = banneret.getGlobal('isTouchpad');
+        this.$.versionNum.setContent("Version: " + enyo.fetchAppInfo().version);
     },
     closePopup: function () {
         this.close();
