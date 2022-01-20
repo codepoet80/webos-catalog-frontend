@@ -76,10 +76,10 @@ enyo.kind({
                                     {
                                         layoutKind: "HFlexLayout",
                                         components: [
-                                            { kind: "Image", name: "vendorLogo", showing: false, className: "vendorLogo noLogo detailLogo" },
+                                            { kind: "Image", name: "vendorLogo", showing: false, className: "vendorLogo noLogo detailLogo", onclick: "openVendorWebPage" },
                                             { width: "6px" },
-                                            { name: "appMaker", className: "appMakerDetail", flex: 1 },
-                                            { kind: "Image", name: "ratingImage", showing: true, className: "starRatings" },
+                                            { name: "appMaker", className: "appMakerDetail", flex: 1, onclick: "openVendorWebPage" },
+                                            { kind: "Image", name: "ratingImage", showing: false, className: "starRatings" },
                                             { width: "6px" },
                                             {
                                                 kind: "IconButton",
@@ -267,6 +267,7 @@ enyo.kind({
             
         }
         if (banneret.getGlobal('isTouchpad')) {
+            this.$.ratingImage.setShowing(true);
             this.$.vendorLogo.setAttribute("onload", "showVendorIcon(this)");
             this.$.vendorLogo.setAttribute("onerror", "hideVendorIcon(this)");
             this.$.vendorLogo.setShowing(true);
@@ -287,27 +288,6 @@ enyo.kind({
     },
     appIdChanged: function() {
         this.getAppBySelectedId(this.appId);
-    },
-    showShareMenu: function() {
-        this.$.menuShare.openAroundControl(this.$.menuButton);
-    },
-    shareMenuSelect: function(inSender, inSelected) {
-        var value = inSelected.getValue();
-        enyo.log("Share option selected: " + value);
-
-        var shareURL = banneret.getPrefs("detailLocation").replace("WebService/", "app/");
-        shareURL += this.$.appName.content.replace(/ /g, "");
-
-        switch(value) {
-            case "do-copyshare":
-                enyo.log("sharing url: " + shareURL);
-                enyo.dom.setClipboard(shareURL);
-                this.$.copyDialog.openAtCenter();
-                break;
-            case "do-emailshare":
-                this.$.emailRequest.call({ id: "com.palm.app.email", params: { summary: "Check out this great webOS app", text: shareURL } });
-                break;
-        }
     },
     getAppBySelectedId: function(appId) {
         appId = appId >= 0 ? appId : this.appId;
@@ -520,6 +500,33 @@ enyo.kind({
             }
         }
     },
+    openVendorWebPage: function() {
+        enyo.log("clicked vendor!");
+        var vendorURL = banneret.getPrefs("detailLocation").replace("WebService/", "author/");
+        vendorURL += this.$.appMaker.content.replace(/ /g, "");
+        this.handleRedirection( { address: vendorURL} );
+    },
+    showShareMenu: function() {
+        this.$.menuShare.openAroundControl(this.$.menuButton);
+    },
+    shareMenuSelect: function(inSender, inSelected) {
+        var value = inSelected.getValue();
+        enyo.log("Share option selected: " + value);
+
+        var shareURL = banneret.getPrefs("detailLocation").replace("WebService/", "app/");
+        shareURL += this.$.appName.content.replace(/ /g, "");
+
+        switch(value) {
+            case "do-copyshare":
+                enyo.log("sharing url: " + shareURL);
+                enyo.dom.setClipboard(shareURL);
+                this.$.copyDialog.openAtCenter();
+                break;
+            case "do-emailshare":
+                this.$.emailRequest.call({ id: "com.palm.app.email", params: { summary: "Check out this great webOS app", text: shareURL } });
+                break;
+        }
+    },
     showMoreCompany: function() {
         var myApp = banneret.getAppById(this.appId);
         this.doShowMoreByCompany(myApp.vendorId);
@@ -567,7 +574,11 @@ enyo.kind({
         if (inSender.address === null || inSender.address === undefined) {
             return;
         }
-        this.$.serviceRequest.call({ target: inSender.address });
+        if (window.PalmSystem) {
+            this.$.serviceRequest.call({ target: inSender.address });
+        } else {
+            window.open(inSender.address);
+        }
     },
     addToBlacklist: function(inSender, inEvent) {
         if (inSender.depressed) {
