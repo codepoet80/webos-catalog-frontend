@@ -61,6 +61,12 @@ enyo.kind({
                         layoutKind: "HFlexLayout",
                         style: "padding: 8px;",
                         components: [
+                            {
+                                name: "emailRequest",
+                                kind: "PalmService",
+                                service: "palm://com.palm.applicationManager",
+                                method: "open"
+                            },
                             { kind: "Image", name: "appIcon", height: "64px", width: "64px" },
                             {
                                 layoutKind: "VFlexLayout",
@@ -77,6 +83,13 @@ enyo.kind({
                                             { width: "6px" },
                                             {
                                                 kind: "IconButton",
+                                                name: "menuButton",
+                                                style: "background-color: rgb(86,68,195); color: white;",
+                                                icon: "images/button_share.png",
+                                                onclick: "showShareMenu"
+                                            },
+                                            {
+                                                kind: "IconButton",
                                                 name: "fetchButton",
                                                 style: "background-color: rgb(86,68,195); color: white;",
                                                 icon: "images/fetchFromArchive.png",
@@ -88,6 +101,16 @@ enyo.kind({
                             }
                         ]
                     },
+                    {kind: "PopupSelect", name: "menuShare", onSelect: "shareMenuSelect", components: [
+                        {caption: "Copy Share Link", value: "do-copyshare"}
+                    ]},
+                    { kind: "ModalDialog", name: "copyDialog", /*contentHeight: "100px",*/ layoutKind: "VFlexLayout",  
+                        caption: "Share", components: [
+                            { w: "fill", domStyles: {"text-align": "center", margin: "12px"}, content: "The share link has been copied!" },
+                        { layoutKind: "HFlexLayout", components: [
+                            { kind: "Button", caption: "OK", flex: 1, popupHandler: "OK"},
+                        ]}
+                    ]},
                     {
                         name: 'imageList',
                         className: "imageList",
@@ -237,7 +260,12 @@ enyo.kind({
     ],
     create: function() {
         this.inherited(arguments);
-
+        if (window.PalmSystem) {
+            var newItems = this.$.menuShare.items;
+            newItems.push({caption: "Email Link", value: "do-emailshare"})
+            this.$.menuShare.setItems(newItems);
+            
+        }
         if (banneret.getGlobal('isTouchpad')) {
             this.$.vendorLogo.setAttribute("onload", "showVendorIcon(this)");
             this.$.vendorLogo.setAttribute("onerror", "hideVendorIcon(this)");
@@ -259,6 +287,27 @@ enyo.kind({
     },
     appIdChanged: function() {
         this.getAppBySelectedId(this.appId);
+    },
+    showShareMenu: function() {
+        this.$.menuShare.openAroundControl(this.$.menuButton);
+    },
+    shareMenuSelect: function(inSender, inSelected) {
+        var value = inSelected.getValue();
+        enyo.log("Share option selected: " + value);
+
+        var shareURL = banneret.getPrefs("detailLocation").replace("WebService/", "app/");
+        shareURL += this.$.appName.content.replace(/ /g, "");
+
+        switch(value) {
+            case "do-copyshare":
+                enyo.log("sharing url: " + shareURL);
+                enyo.dom.setClipboard(shareURL);
+                this.$.copyDialog.openAtCenter();
+                break;
+            case "do-emailshare":
+                this.$.emailRequest.call({ id: "com.palm.app.email", params: { summary: "Check out this great webOS app", text: shareURL } });
+                break;
+        }
     },
     getAppBySelectedId: function(appId) {
         appId = appId >= 0 ? appId : this.appId;
@@ -319,7 +368,7 @@ enyo.kind({
             this.$.appName.setContent(banneret.cleanText(myApp.title));
             this.$.appMaker.setContent(banneret.cleanText(myApp.author));
             this.$.vendorLogo.setAttribute("vendorletter", myApp.author[0]);
-            this.$.vendorLogo.setSrc("http://appcatalog.webosarchive.com/WebService/getVendorIcon.php?url=" + (myApp.detail.homeURL || myApp.detail.supportURL));
+            this.$.vendorLogo.setSrc(banneret.getPrefs("detailLocation") + "getVendorIcon.php?url=" + (myApp.detail.homeURL || myApp.detail.supportURL));
 
             if (myApp.detail.starRating != null && myApp.detail.starRating > 0) {
                 var r = myApp.detail.starRating;
