@@ -19,6 +19,16 @@ enyo.kind({
             method: "open"
         },
         {
+            name: "emailRequest",
+            kind: "PalmService",
+            service: "palm://com.palm.applicationManager",
+            method: "open"
+        },
+        {
+            name: "countDownloadRequest",
+            kind: "WebService",
+        },
+        {
             name: "headerLabel",
             layoutKind: "HFlexLayout",
             kind: "Toolbar",
@@ -61,12 +71,6 @@ enyo.kind({
                         layoutKind: "HFlexLayout",
                         style: "padding: 8px;",
                         components: [
-                            {
-                                name: "emailRequest",
-                                kind: "PalmService",
-                                service: "palm://com.palm.applicationManager",
-                                method: "open"
-                            },
                             { kind: "Image", name: "appIcon", height: "64px", width: "64px" },
                             {
                                 layoutKind: "VFlexLayout",
@@ -348,7 +352,10 @@ enyo.kind({
             this.$.appName.setContent(banneret.cleanText(myApp.title));
             this.$.appMaker.setContent(banneret.cleanText(myApp.author));
             this.$.vendorLogo.setAttribute("vendorletter", myApp.author[0]);
-            this.$.vendorLogo.setSrc(banneret.getPrefs("detailLocation") + "getVendorIcon.php?url=" + (myApp.detail.homeURL || myApp.detail.supportURL));
+            if (!myApp.vendorId || myApp.vendorId == "")
+                this.$.vendorLogo.setSrc(banneret.getPrefs("detailLocation") + "getVendorIcon.php?url=" + (myApp.detail.homeURL || myApp.detail.supportURL));
+            else
+                this.$.vendorLogo.setSrc(banneret.getPrefs("detailLocation") + "getVendorIcon.php?url=" + this.makeVendorUrl());
 
             if (myApp.detail.starRating != null && myApp.detail.starRating > 0) {
                 var r = myApp.detail.starRating;
@@ -502,9 +509,12 @@ enyo.kind({
     },
     openVendorWebPage: function() {
         enyo.log("clicked vendor!");
+        this.handleRedirection( { address: this.makeVendorUrl()} );
+    },
+    makeVendorUrl: function() {
         var vendorURL = banneret.getPrefs("detailLocation").replace("WebService/", "author/");
         vendorURL += this.$.appMaker.content.replace(/ /g, "");
-        this.handleRedirection( { address: vendorURL} );
+        return vendorURL;
     },
     showShareMenu: function() {
         this.$.menuShare.openAroundControl(this.$.menuButton);
@@ -556,8 +566,11 @@ enyo.kind({
         if (window.location.hostname.indexOf(".media.cryptofs.apps") != -1) {
             this.$.serviceRequest.call({ id: "org.webosinternals.preware", params: { type: "install", file: app } });
         } else {
-            document.location = app;
+            window.open(app);
         }
+        //Count download
+        this.$.countDownloadRequest.setUrl(banneret.getPrefs("detailLocation") + "countAppDownload.php?appid=" + myApp.id);
+        this.$.countDownloadRequest.call();
     },
     handleShowImages: function() {
         this.doShowImages(this.getImageList());
