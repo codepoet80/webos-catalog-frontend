@@ -93,7 +93,7 @@ enyo.kind({
             name: "updatePopUp",
             lazy: false,
             layoutKind: "VFlexLayout",
-            style: "width: 80%;min-height:275px",
+            style: "width: 80%;min-height:288px",
             components: [
                 { content: "<b>Update Available!</b>" },
                 {
