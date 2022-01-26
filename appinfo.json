@@ -1,7 +1,7 @@
 {
     "id": "com.palm.app-museum2",
-    "version": "2.8.2",
-    "versionNote": "Improve vendor info and prep for new features.",
+    "version": "2.9.0",
+    "versionNote": "LuneOS fixes and enhancements",
     "lastModifiedTime": "2020-12-04T13:04:48-04:00",
     "vendor": "codepoet80",
     "type": "web",
@@ -18,5 +18,6 @@
             "url": "appcatalog.webosarchive.com",
             "launchParam": { "common": { "sceneType": "search", "params": { "type": "query", "search": "#{searchTerms}" } } }
         }
-    }
+    },
+    "requiredPermissions": ["networking.internal", "services", "applications", "applications.launch", "applications.internal", "system", "database.internal"]
 }
