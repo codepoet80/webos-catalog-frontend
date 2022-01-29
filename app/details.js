@@ -568,6 +568,7 @@ enyo.kind({
         } else {
             window.open(app);
         }
+        //if LuneOS: org.webosports.app.preware
         //Count download
         this.$.countDownloadRequest.setUrl(banneret.getPrefs("detailLocation") + "countAppDownload.php?appid=" + myApp.id);
         this.$.countDownloadRequest.call();
