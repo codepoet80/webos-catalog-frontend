@@ -566,18 +566,18 @@ enyo.kind({
         
         //Do the right kind of download for environment
         enyo.log("Window location is " + JSON.stringify(window.location));
-        if(window.location.href.indexOf("file:///media/cryptofs") != -1) { // Running on LuneOS
-            this.$.serviceRequest.call({ id: "org.webosports.app.preware", params: { type: "install", file: app } });
-            this.$.countDownloadRequest.setUrl(banneret.getPrefs("detailLocation") + "countAppDownload.php?appid=" + myApp.id + "&source=luneos");
-        }
-        else if (window.location.hostname.indexOf(".media.cryptofs.apps") != -1) {   // Running on webOS
+
+        if (window.location.hostname && window.location.hostname.indexOf(".media.cryptofs.apps") != -1) {   // Running on webOS
             this.$.serviceRequest.call({ id: "org.webosinternals.preware", params: { type: "install", file: app } });
             this.$.countDownloadRequest.setUrl(banneret.getPrefs("detailLocation") + "countAppDownload.php?appid=" + myApp.id + "&source=webos");
+        } else if(window.location.href.indexOf("file:///media/cryptofs") != -1) { // Running on LuneOS
+            this.$.serviceRequest.call({ id: "org.webosports.app.preware", params: { type: "install", file: app } });
+            this.$.countDownloadRequest.setUrl(banneret.getPrefs("detailLocation") + "countAppDownload.php?appid=" + myApp.id + "&source=luneos");
         } else {    // Running in a web browser
             window.open(app);
             this.$.countDownloadRequest.setUrl(banneret.getPrefs("detailLocation") + "countAppDownload.php?appid=" + myApp.id);
         }
-
+        
         //Count download
         this.$.countDownloadRequest.call();
     },
