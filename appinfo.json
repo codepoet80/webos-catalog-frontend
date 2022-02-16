@@ -19,5 +19,5 @@
             "launchParam": { "common": { "sceneType": "search", "params": { "type": "query", "search": "#{searchTerms}" } } }
         }
     },
-    "requiredPermissions": ["networking.internal", "services", "applications", "applications.launch", "applications.internal", "system", "database.internal"]
+    "requiredPermissions": ["applications.internal", "applications", "activities.manage", "devices", "settings", "settings.read", "services", "database", "database.internal", "filecache", "system", "networking", "networking.internal"]
 }
