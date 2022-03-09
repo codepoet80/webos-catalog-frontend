@@ -429,7 +429,7 @@ enyo.kind({
 		var keys = Object.keys(imageList);
 		var imageArr = keys.map(function (im, idx, arr) {
             var bURL = banneret.getPrefs("baseImageURL");
-            if (imageList[im].screenshot.toLowerCase().indexOf("http") === 0) {
+            if (imageList[im].screenshot.toLowerCase().indexOf("://") == -1) {
                 bURL = "";
             }
 			return bURL + imageList[im].screenshot;

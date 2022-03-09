@@ -97,7 +97,11 @@ enyo.kind({
 		this.$.appTitle.setContent(banneret.cleanText(appItem.title));
 		this.$.appAuthor.setContent(banneret.cleanText(appItem.author));
 
-		var appIconUri = banneret.getPrefs().baseImageURL + (banneret.getPrefs().appIconSize ? appItem.appIconBig : appItem.appIcon);
+		if (appItem.appIcon.indexOf("://") == -1 && appItem.appIconBig.indexOf("://") == -1)
+			var appIconUri = banneret.getPrefs().baseImageURL + (banneret.getPrefs().appIconSize ? appItem.appIconBig : appItem.appIcon);
+		else {
+			var appIconUri = appItem.appIcon;
+		}
 		this.$.appIcon.setAttribute("icon-src", appIconUri);
         if (banneret.getPrefs("loadIconsWhileScrolling") === true) {
             this.$.appIcon.addStyles("background-image: url('"+appIconUri+"');");

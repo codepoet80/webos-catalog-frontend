@@ -32,11 +32,15 @@ enyo.kind({
     		s.destroyControls()
 
 		imageList.forEach(function (img, idx, arr) {
+			if (img.indexOf("://") == -1)
+				var bURL = baseURL;
+			else
+				var bURL = "";
 			s.createContainedComponent({
 				name: "screenshot"+idx,
 				className: "screenshot",
 				index: idx,
-				style: "background-image: url(" + banneret.getPrefs("baseImageURL") + img +")"
+				style: "background-image: url(" + bURL + img +")"
 			}, {owner: this})
 		}.bind(this));
 		s.render();
