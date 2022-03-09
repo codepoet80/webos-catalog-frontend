@@ -554,15 +554,19 @@ enyo.kind({
     },
     handleFetch: function() {
         var myApp = banneret.getGlobal("appList")[this._index];
-
-        var protocol = banneret.getPrefs("archiveFTP") ? "FTP://" : "HTTP://";
-        var URI = banneret.getPrefs("archiveLocation");
-        var username = banneret.getPrefs("archiveFTP") ? banneret.getPrefs("archiveLoginName") : "";
-        var password = banneret.getPrefs("archiveFTP") ? banneret.getPrefs("archiveLoginPassword") : "";
-        var filename = banneret.getPrefs("archiveFileFormatting") ? myApp.detail.filename : String(myApp.id) + "--" + myApp.detail.filename;
-
-        var login = [username, password].join(":") + "@";
-        var app = protocol + (banneret.getPrefs("archiveFTP") ? login : "") + URI + "/" + filename;
+        //Support absolute download paths (files hosted elsewhere)
+        if (myApp.detail.filename.indexOf("://") == -1) {
+            var protocol = banneret.getPrefs("archiveFTP") ? "FTP://" : "HTTP://";
+            var URI = banneret.getPrefs("archiveLocation");
+            var username = banneret.getPrefs("archiveFTP") ? banneret.getPrefs("archiveLoginName") : "";
+            var password = banneret.getPrefs("archiveFTP") ? banneret.getPrefs("archiveLoginPassword") : "";
+            var filename = banneret.getPrefs("archiveFileFormatting") ? myApp.detail.filename : String(myApp.id) + "--" + myApp.detail.filename;
+            
+            var login = [username, password].join(":") + "@";
+            var app = protocol + (banneret.getPrefs("archiveFTP") ? login : "") + URI + "/" + filename;
+        } else {
+            var app = myApp.detail.filename;
+        }
         
         //Do the right kind of download for environment
         enyo.log("Window location is " + JSON.stringify(window.location));
