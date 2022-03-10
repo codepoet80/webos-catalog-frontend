@@ -348,7 +348,11 @@ enyo.kind({
                 }
             }.bind(this));
 
-            this.$.appIcon.setSrc(banneret.getPrefs("baseImageURL") + myApp.appIconBig);
+            if (myApp.appIconBig && myApp.appIconBig.indexOf("://") == -1)
+                this.$.appIcon.setSrc(banneret.getPrefs("baseImageURL") + myApp.appIconBig);
+            else {
+                this.$.appIcon.setSrc(myApp.appIconBig);
+            }
             this.$.appName.setContent(banneret.cleanText(myApp.title));
             this.$.appMaker.setContent(banneret.cleanText(myApp.author));
             this.$.vendorLogo.setAttribute("vendorletter", myApp.author[0]);
@@ -392,7 +396,10 @@ enyo.kind({
             var style = [];
             var baseURL = banneret.getPrefs("baseImageURL")
             screenshots.forEach(function(screenS, idx, arr) {
-                var bURL = baseURL;
+                if (arr[idx].screenshot.indexOf("://") == -1)
+                    var bURL = baseURL;
+                else
+                    var bURL = "";
                 if (arr[idx].screenshot.toLowerCase().indexOf("http") === 0) {
                     bURL = "";
                 }
@@ -554,15 +561,19 @@ enyo.kind({
     },
     handleFetch: function() {
         var myApp = banneret.getGlobal("appList")[this._index];
-
-        var protocol = banneret.getPrefs("archiveFTP") ? "FTP://" : "HTTP://";
-        var URI = banneret.getPrefs("archiveLocation");
-        var username = banneret.getPrefs("archiveFTP") ? banneret.getPrefs("archiveLoginName") : "";
-        var password = banneret.getPrefs("archiveFTP") ? banneret.getPrefs("archiveLoginPassword") : "";
-        var filename = banneret.getPrefs("archiveFileFormatting") ? myApp.detail.filename : String(myApp.id) + "--" + myApp.detail.filename;
-
-        var login = [username, password].join(":") + "@";
-        var app = protocol + (banneret.getPrefs("archiveFTP") ? login : "") + URI + "/" + filename;
+        //Support absolute download paths (files hosted elsewhere)
+        if (myApp.detail.filename.indexOf("://") == -1) {
+            var protocol = banneret.getPrefs("archiveFTP") ? "FTP://" : "HTTP://";
+            var URI = banneret.getPrefs("archiveLocation");
+            var username = banneret.getPrefs("archiveFTP") ? banneret.getPrefs("archiveLoginName") : "";
+            var password = banneret.getPrefs("archiveFTP") ? banneret.getPrefs("archiveLoginPassword") : "";
+            var filename = banneret.getPrefs("archiveFileFormatting") ? myApp.detail.filename : String(myApp.id) + "--" + myApp.detail.filename;
+            
+            var login = [username, password].join(":") + "@";
+            var app = protocol + (banneret.getPrefs("archiveFTP") ? login : "") + URI + "/" + filename;
+        } else {
+            var app = myApp.detail.filename;
+        }
         
         //Do the right kind of download for environment
         enyo.log("Window location is " + JSON.stringify(window.location));
