@@ -4,7 +4,7 @@
 
 Enyo-based App Catalog for legacy webOS, forked from App Museum. You can use this app on a Pre3 or Touchpad, or access the catalog in a browser at [http://appcatalog.webosarchive.com](http://appcatalog.webosarchive.com)
 
-Back-end is here: [https://github.com/codepoet80/webos-catalog-backend](https://github.com/codepoet80/webos-catalog-backend)
+Back-end and additional documentation here: [https://github.com/codepoet80/webos-catalog-backend](https://github.com/codepoet80/webos-catalog-backend)
 
 ## What is This?
 
@@ -13,7 +13,7 @@ Pre3 or TouchPad.
 
 webOS technology was acquired by LG and repurposed for TVs and IoT devices, but they made significant changes and this app will not run on those platforms.
 
-Releases of this app, and many other new and restored apps, can be found in the [webOS Archive App Museum](http://appcatalog.webosarchive.com).
+Releases of this app, and many other new and restored apps, can be found in the [webOS Archive App Museum II](http://appcatalog.webosarchive.com).
 
 ## Why?
 
@@ -22,7 +22,7 @@ Apple and Google take turns copying each other, and consumers line up to buy bas
 Windows Phone were serious competitors was marked by creativity in form factor and software development, which has been lost. This app represents a (futile)
 attempt to keep webOS mobile devices useful for as long as possible.
 
-The website [http://www.webosarchive.com](http://www.webosarchive.com) recovers, archives and maintains material related to development, and hosts services
+The website [webosarchive.com](http://www.webosarchive.com) recovers, archives and maintains material related to development, and hosts services
 that restore functionality to webOS devices. A small but active [community](http://www.webosarchive.com/discord) of users take advantage of these services to keep their retro devices alive.
 
 ## How?
