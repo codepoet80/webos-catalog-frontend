@@ -349,7 +349,7 @@ enyo.kind({
             }.bind(this));
 
             if (myApp.appIconBig && myApp.appIconBig.indexOf("://") == -1)
-                this.$.appIcon.setSrc(banneret.getPrefs("baseImageURL") + myApp.appIconBig);
+                this.$.appIcon.setSrc(banneret.getPrefs("baseImageURL") + "/" + myApp.appIconBig);
             else {
                 this.$.appIcon.setSrc(myApp.appIconBig);
             }
@@ -357,9 +357,9 @@ enyo.kind({
             this.$.appMaker.setContent(banneret.cleanText(myApp.author));
             this.$.vendorLogo.setAttribute("vendorletter", myApp.author[0]);
             if (!myApp.vendorId || myApp.vendorId == "")
-                this.$.vendorLogo.setSrc(banneret.getPrefs("detailLocation") + "getVendorIcon.php?url=" + (myApp.detail.homeURL || myApp.detail.supportURL));
+                this.$.vendorLogo.setSrc(banneret.getPrefs("detailLocation") + "/getVendorIcon.php?url=" + (myApp.detail.homeURL || myApp.detail.supportURL));
             else
-                this.$.vendorLogo.setSrc(banneret.getPrefs("detailLocation") + "getVendorIcon.php?url=" + this.makeVendorUrl());
+                this.$.vendorLogo.setSrc(banneret.getPrefs("detailLocation") + "/getVendorIcon.php?url=" + this.makeVendorUrl());
 
             if (myApp.detail.starRating != null && myApp.detail.starRating > 0) {
                 var r = myApp.detail.starRating;
@@ -394,7 +394,7 @@ enyo.kind({
             screenshots[1] = myApp.detail.images[sC] ? myApp.detail.images[sC++] : screenshots[0];
             screenshots[2] = myApp.detail.images[sC] ? myApp.detail.images[sC] : screenshots[0];
             var style = [];
-            var baseURL = banneret.getPrefs("baseImageURL")
+            var baseURL = banneret.getPrefs("baseImageURL") + "/";
             screenshots.forEach(function(screenS, idx, arr) {
                 if (arr[idx].screenshot.indexOf("://") == -1)
                     var bURL = baseURL;
@@ -500,7 +500,7 @@ enyo.kind({
             this.appId = myApp.id;
             if (myApp.detail === undefined) {
                 banneret.loadJSON(
-                    banneret.getPrefs("detailLocation") + banneret.getPrefs("detailPage") + banneret.getPrefs("backendVersion") + ".php?id=" + String(this.appId),
+                    banneret.getPrefs("detailLocation") + "/" + banneret.getPrefs("detailPage") + banneret.getPrefs("backendVersion") + ".php?id=" + String(this.appId),
                     function(inResponse) {
                         myApp.detail = inResponse;
                         detailsFound();
@@ -519,7 +519,7 @@ enyo.kind({
         this.handleRedirection( { address: this.makeVendorUrl()} );
     },
     makeVendorUrl: function() {
-        var vendorURL = banneret.getPrefs("detailLocation").replace("WebService/", "author/");
+        var vendorURL = banneret.getPrefs("detailLocation").replace("WebService", "author");
         vendorURL += this.$.appMaker.content.replace(/ /g, "");
         return vendorURL;
     },
@@ -530,7 +530,7 @@ enyo.kind({
         var value = inSelected.getValue();
         enyo.log("Share option selected: " + value);
 
-        var shareURL = banneret.getPrefs("detailLocation").replace("WebService/", "app/");
+        var shareURL = banneret.getPrefs("detailLocation").replace("WebService", "app");
         shareURL += this.$.appName.content.replace(/ /g, "");
 
         switch(value) {
@@ -580,13 +580,13 @@ enyo.kind({
 
         if (window.location.hostname && window.location.hostname.indexOf(".media.cryptofs.apps") != -1) {   // Running on webOS
             this.$.serviceRequest.call({ id: "org.webosinternals.preware", params: { type: "install", file: app } });
-            this.$.countDownloadRequest.setUrl(banneret.getPrefs("detailLocation") + "countAppDownload.php?appid=" + myApp.id + "&source=webos");
+            this.$.countDownloadRequest.setUrl(banneret.getPrefs("detailLocation") + "/countAppDownload.php?appid=" + myApp.id + "&source=webos");
         } else if(window.location.href.indexOf("file:///media/cryptofs") != -1) { // Running on LuneOS
             this.$.serviceRequest.call({ id: "org.webosports.app.preware", params: { type: "install", file: app } });
-            this.$.countDownloadRequest.setUrl(banneret.getPrefs("detailLocation") + "countAppDownload.php?appid=" + myApp.id + "&source=luneos");
+            this.$.countDownloadRequest.setUrl(banneret.getPrefs("detailLocation") + "/countAppDownload.php?appid=" + myApp.id + "&source=luneos");
         } else {    // Running in a web browser
             window.open(app);
-            this.$.countDownloadRequest.setUrl(banneret.getPrefs("detailLocation") + "countAppDownload.php?appid=" + myApp.id);
+            this.$.countDownloadRequest.setUrl(banneret.getPrefs("detailLocation") + "/countAppDownload.php?appid=" + myApp.id);
         }
         
         //Count download

@@ -8,10 +8,18 @@ enyo.kind({
 	components: [
 		{kind: "Helpers.Updater", name: "SelfUpdater" },
 		{
+			name: "ConfigService",
+			kind: "WebService",
+            url: banneret.getPrefs("detailLocation")+"/getConfig.php",
+            method: "GET",
+            handleAs: "json",
+            onSuccess: "GetConfigSuccessFn",
+			onFailure: "GetConfigFailureFn"
+		},
+		{
 			name: "MasterWebService",
 			kind: "WebService",
-            //url: "http://localhost/museum/"+banneret.getPrefs("masterPage"),
-            url: banneret.getPrefs("detailLocation")+banneret.getPrefs("masterPage")+banneret.getPrefs("backendVersion")+".php",
+            url: banneret.getPrefs("detailLocation")+"/"+banneret.getPrefs("masterPage")+banneret.getPrefs("backendVersion")+".php",
             method: "POST",
             handleAs: "json",
             onSuccess: "MasterWebServiceSuccessFn",
@@ -245,7 +253,7 @@ enyo.kind({
 		document.addEventListener("keydown", this.showSearchBar);
 
 		this.setPeekWidth();
-		this.handlePrefsChange();
+		this.$.ConfigService.call();
 
 		if (this._touchpad) {
 			this.addClass("touchpad");
@@ -274,6 +282,43 @@ enyo.kind({
 	},
 	handleOpenMenu: function () {
 		this.$.appMenu.open();
+	},
+	GetConfigSuccessFn: function (inSender, inData, inResponse) {
+		enyo.log("Got config response");
+		if (inData) {
+			enyo.log("Using config response");
+			if (inData.package_host) {
+				var newPackageHost = inData.package_host;
+				if (newPackageHost.indexOf("://") != -1) {
+					newPackageHost = newPackageHost.replace("ftp://", "");
+					newPackageHost = newPackageHost.replace("http://", "");
+					newPackageHost = newPackageHost.replace("https://", "");
+				}	
+				if (banneret.getPrefs().serviceArchiveLocation != newPackageHost) {
+					enyo.warn("Got new configuration setting from server, using package_host: " + newPackageHost);
+					banneret.setPref("serviceArchiveLocation", newPackageHost);
+					banneret.setPref("archiveLocation", newPackageHost);
+				}
+			}
+			if (inData.image_host) {
+				var newImageHost = inData.image_host;
+				if (newImageHost.indexOf("://") == -1)
+					newImageHost = "http://" + newImageHost;
+				if (banneret.getPrefs().serviceBaseImageURL != newImageHost) {
+					enyo.warn("Got new configuration setting from server, over-writing prefs and using image_host: " + newImageHost);
+					banneret.setPref("serviceBaseImageURL", newImageHost);
+					banneret.setPref("baseImageURL", newImageHost);
+				}
+			}
+        }
+		else {
+			enyo.warn("Failure parsing Configuration from server, defaults wil be used.");
+		}
+		this.handlePrefsChange();
+	},
+	GetConfigFailureFn: function() {
+		enyo.warn("Faiure fetching Configuration from server, defaults will be used.");
+		this.handlePrefsChange();
 	},
 	MasterWebServiceSuccessFn: function (inSender, inData, inResponse) {
         if (inResponse === "end call") {
@@ -428,8 +473,8 @@ enyo.kind({
 	handleShowImages: function (inSender, imageList) {
 		var keys = Object.keys(imageList);
 		var imageArr = keys.map(function (im, idx, arr) {
-            var bURL = banneret.getPrefs("baseImageURL");
-            if (imageList[im].screenshot.toLowerCase().indexOf("://") == -1) {
+            var bURL = banneret.getPrefs("baseImageURL") + "/";
+            if (imageList[im].screenshot.toLowerCase().indexOf("://") != -1) {
                 bURL = "";
             }
 			return bURL + imageList[im].screenshot;

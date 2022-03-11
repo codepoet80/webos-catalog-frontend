@@ -98,7 +98,7 @@ enyo.kind({
 		this.$.appAuthor.setContent(banneret.cleanText(appItem.author));
 
 		if (appItem.appIcon.indexOf("://") == -1 && appItem.appIconBig.indexOf("://") == -1)
-			var appIconUri = banneret.getPrefs().baseImageURL + (banneret.getPrefs().appIconSize ? appItem.appIconBig : appItem.appIcon);
+			var appIconUri = banneret.getPrefs().baseImageURL + "/" + (banneret.getPrefs().appIconSize ? appItem.appIconBig : appItem.appIcon);
 		else {
 			var appIconUri = appItem.appIcon;
 		}
