@@ -348,8 +348,9 @@ enyo.kind({
                 }
             }.bind(this));
 
-            if (myApp.appIconBig && myApp.appIconBig.indexOf("://") == -1)
-                this.$.appIcon.setSrc(banneret.getPrefs("baseImageURL") + "/" + myApp.appIconBig);
+            if (myApp.appIconBig && myApp.appIconBig.indexOf("://") == -1) {
+                this.$.appIcon.setSrc(banneret.getPrefs("baseImageURL") + "/" + myApp.appIconBig.toLowerCase());
+            }
             else {
                 this.$.appIcon.setSrc(myApp.appIconBig);
             }
@@ -404,9 +405,9 @@ enyo.kind({
                     bURL = "";
                 }
                 if (isTouchpad && screenS.device === "P") {
-                    style.push("background-image: url('" + bURL + arr[idx].screenshot + "');");
+                    style.push("background-image: url('" + bURL + arr[idx].screenshot.toLowerCase() + "');");
                 } else {
-                    style.push("background-image: url('" + bURL + arr[idx].thumbnail + "');");
+                    style.push("background-image: url('" + bURL + arr[idx].thumbnail.toLowerCase() + "');");
                 }
             });
             this.$.screenshot1.addStyles("background-image: none");

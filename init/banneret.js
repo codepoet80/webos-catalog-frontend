@@ -84,7 +84,7 @@ window.setGlobal = banneret.setGlobal = function(key, variable) {
 
 banneret.factory_settings = {
     favourites: {},
-    baseImageURL: "http://packages.webosarchive.com/AppImages/",
+    baseImageURL: "http://appcatalog.webosarchive.com/AppImages/",
     serviceBaseImageURL: "",
     catIconSize: banneret.getGlobal('isTouchpad') ? 1 : 0,
     appIconSize: banneret.getGlobal('isTouchpad') ? 1 : 0,

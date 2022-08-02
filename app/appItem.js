@@ -97,8 +97,9 @@ enyo.kind({
 		this.$.appTitle.setContent(banneret.cleanText(appItem.title));
 		this.$.appAuthor.setContent(banneret.cleanText(appItem.author));
 
-		if (appItem.appIcon.indexOf("://") == -1 && appItem.appIconBig.indexOf("://") == -1)
-			var appIconUri = banneret.getPrefs().baseImageURL + "/" + (banneret.getPrefs().appIconSize ? appItem.appIconBig : appItem.appIcon);
+		if (appItem.appIcon.indexOf("://") == -1 && appItem.appIconBig.indexOf("://") == -1) {
+			var appIconUri = banneret.getPrefs().baseImageURL + "/" + (banneret.getPrefs().appIconSize ? appItem.appIconBig : appItem.appIcon).toLowerCase();
+		}
 		else {
 			var appIconUri = appItem.appIcon;
 		}
